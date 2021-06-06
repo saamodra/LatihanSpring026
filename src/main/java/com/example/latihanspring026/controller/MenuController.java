@@ -2,8 +2,6 @@ package com.example.latihanspring026.controller;
 
 import com.example.latihanspring026.model.Menu;
 import com.example.latihanspring026.service.MenuService;
-import com.example.latihanspring026.service.OrderSegmentService;
-import com.example.latihanspring026.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

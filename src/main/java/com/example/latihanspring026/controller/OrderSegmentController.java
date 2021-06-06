@@ -1,12 +1,15 @@
 package com.example.latihanspring026.controller;
 
+import com.example.latihanspring026.model.Menu;
 import com.example.latihanspring026.model.OrderSegment;
 import com.example.latihanspring026.model.Result;
+import com.example.latihanspring026.service.MenuService;
 import com.example.latihanspring026.service.OrderSegmentService;
 import com.example.latihanspring026.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +17,10 @@ import java.util.List;
 
 @Controller
 public class OrderSegmentController {
+
+    @Autowired
+    MenuService menuService;
+
     @Autowired
     OrderSegmentService orderSegmentService;
 
@@ -24,6 +31,23 @@ public class OrderSegmentController {
     public String getOrderSegment() {
 //        model.addAttribute("orderSegments", orderSegmentService.getOrderSegment());
         return "/dashboard.html";
+    }
+
+    @PostMapping("/order-segment/tambah")
+    public String store(OrderSegment orderSeg, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "/view/add";
+        }
+
+        // set ID menu sesuai dengan id terakhir ditambah 1
+        orderSeg.setIdOrderSegment(orderSegmentService.getLastData().getIdOrderSegment() + 1);
+        //menu.setIdMenu(menuService.getLastData().getIdMenu() + 1);
+
+        Menu menu = menuService.getMenuById(orderSeg.getIdMenu());
+        orderSeg.setOsPrice(menu.getHarga() * orderSeg.getOsCount());
+        orderSegmentService.addOrderSegment(orderSeg);
+
+        return "redirect:/orders";
     }
 
     @GetMapping("/order-segment")

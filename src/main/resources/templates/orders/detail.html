@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      lang="en"
+      layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="ibox ">
+        <div class="ibox-title">
+            <h5>Data Order</h5>
+        </div>
+        <div class="ibox-content">
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <td>ID Order</td>
+                    <td th:text="${order.idOrder}"></td>
+                </tr>
+                <tr>
+                    <td>Nama Customer</td>
+                    <td th:text="${order.namaCustomer}"></td>
+                </tr>
+                <tr>
+                    <td>Tanggal Order</td>
+                    <td th:text="${order.orderDate}"></td>
+                </tr>
+                <tr>
+                    <td>Total Menu</td>
+                    <td th:text="${order.orderCount}"></td>
+                </tr>
+                <tr>
+                    <td>Total Tagihan</td>
+                    <td th:text="${order.orderBill}"></td>
+                </tr>
+                <tr>
+                    <td>Biaya Kirim</td>
+                    <td th:text="${order.orderDelivery}"></td>
+                </tr>
+                <tr>
+                    <td>Total Pembayaran</td>
+                    <td th:text="${order.orderTotal}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <h5 class="alert alert-info">Detail Pemesanan</h5>
+            </div>
+            <table class="table table-striped table-bordered table-hover dataTables-example">
+                <thead>
+                <tr>
+                    <th>ID OS</th>
+                    <th>ID Order</th>
+                    <th>ID Menu</th>
+                    <th>Jumlah</th>
+                    <th>Harga</th>
+                    <th>Detail Pesanan</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="orseg : ${orderSegments}">
+                    <td th:text="${orseg.idOrderSegment}"></td>
+                    <td th:text="${orseg.idOrder}"></td>
+                    <td th:text="${orseg.idMenu}"></td>
+                    <td th:text="${orseg.osCount}"></td>
+                    <td th:text="${orseg.osPrice}"></td>
+                    <td th:text="${orseg.osDetail}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

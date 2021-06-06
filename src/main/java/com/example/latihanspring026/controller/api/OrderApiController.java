@@ -14,12 +14,12 @@ public class OrderApiController {
     @Autowired
     OrdersService orderService;
 
-    @GetMapping("/orders")
+    @GetMapping("/api/orders")
     public List<Orders> getOrders() {
         return orderService.getOrders();
     }
 
-    @GetMapping("/order")
+    @GetMapping("/api/order")
     public Object getOrder(@RequestParam("id") int id) {
         Orders order = orderService.getOrderById(id);
 
@@ -30,17 +30,17 @@ public class OrderApiController {
         return order;
     }
 
-    @PostMapping("/order")
+    @PostMapping("/api/order")
     public Object saveOrder(HttpServletResponse response, @RequestBody Orders order) {
         return orderService.addOrder(order);
     }
 
-    @PutMapping("/order")
+    @PutMapping("/api/order")
     public Object updateOrder(HttpServletResponse response, @RequestBody Orders order) {
         return orderService.updateOrder(order);
     }
 
-    @DeleteMapping("/order")
+    @DeleteMapping("/api/order")
     public Object deleteOrder(HttpServletResponse response, @RequestParam("id") int id) {
         return orderService.deleteOrder(id);
     }
