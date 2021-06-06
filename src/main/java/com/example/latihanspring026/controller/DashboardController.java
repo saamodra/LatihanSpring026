@@ -1,4 +1,4 @@
-package com.example.latihanspring026.controller.view;
+package com.example.latihanspring026.controller;
 
 import com.example.latihanspring026.service.OrderSegmentService;
 import org.springframework.beans.factory.annotation.Autowired;

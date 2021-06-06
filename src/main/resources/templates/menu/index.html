@@ -4,7 +4,7 @@
       layout:decorate="~{layout/main}">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Menu</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -36,10 +36,10 @@
               <td th:text="${menu.menuCategory}"></td>
               <td th:text="${menu.menuDetail}"></td>
               <td th:text="${menu.harga}"></td>
-              <td th:text="${menu.statusBasi}"></td>
+              <td th:text="${menu.statusBasi == 1 ? 'Cepat Basi' : 'Tidak Cepat Basi'}"></td>
               <td>
-                <a href="" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
-                <a href="" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                <a th:href="@{/menu/ubah/{id}(id=${menu.idMenu})}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a>
+                <a th:href="@{/menu/hapus/{id}(id=${menu.idMenu})}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</a>
               </td>
             </tr>
             </tbody>

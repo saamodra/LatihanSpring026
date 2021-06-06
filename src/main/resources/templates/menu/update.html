@@ -10,10 +10,10 @@
 <div layout:fragment="content">
   <div class="ibox ">
     <div class="ibox-title">
-      <h5>Tambah Menu</h5>
+      <h5>Ubah Menu</h5>
     </div>
     <div class="ibox-content">
-      <form action="#" th:action="@{/menu/tambah}" th:object="${menu}" method="post">
+      <form action="#" th:action="@{/menu/ubah/{id}(id=${menu.idMenu})}" th:object="${menu}" method="post">
         <div class="form-group">
           <label for="menuName">Nama Menu</label>
           <input type="text" th:field="*{menuName}" id="menuName" placeholder="Nama Menu"
