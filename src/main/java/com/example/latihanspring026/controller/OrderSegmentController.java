@@ -5,12 +5,14 @@ import com.example.latihanspring026.model.Result;
 import com.example.latihanspring026.service.OrderSegmentService;
 import com.example.latihanspring026.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@RestController
+@Controller
 public class OrderSegmentController {
     @Autowired
     OrderSegmentService orderSegmentService;
@@ -19,8 +21,9 @@ public class OrderSegmentController {
     OrdersService ordersService;
 
     @GetMapping("/order-segments")
-    public List<OrderSegment> getOrderSegment() {
-        return orderSegmentService.getOrderSegment();
+    public String getOrderSegment() {
+//        model.addAttribute("orderSegments", orderSegmentService.getOrderSegment());
+        return "/dashboard.html";
     }
 
     @GetMapping("/order-segment")

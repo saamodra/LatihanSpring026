@@ -1,0 +1,124 @@
+<!--<http:html lang="en" xmlns:th="http://www.thymeleaf.org" http: xmlns:http="http://www.w3.org/1999/xhtml"/> >-->
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Spring Kel. 04</title>
+
+    <link th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/font-awesome/css/font-awesome.css}" rel="stylesheet">
+
+    <link th:href="@{/assets/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <img alt="image" class="rounded-circle" th:src="@{/assets/img/profile_small.jpg}"/>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="block m-t-xs font-bold">David Williams</span>
+                            <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
+                            <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        IN+
+                    </div>
+                </li>
+                <li class="active">
+                    <a href="/"><i class="fa fa-diamond"></i> <span class="nav-label">Dashboard</span></a>
+                </li>
+                <li>
+                    <a href="/menu"><i class="fa fa-pie-chart"></i> <span class="nav-label">Menu</span> </a>
+                </li>
+                <li>
+                    <a href="/order"><i class="fa fa-pie-chart"></i> <span class="nav-label">Order</span> </a>
+                </li>
+                <li>
+                    <a href="/order-segment"><i class="fa fa-pie-chart"></i> <span
+                            class="nav-label">Order Segments</span> </a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
+                    </a>
+                    <form role="search" class="navbar-form-custom" action="search_results.html">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search for something..." class="form-control"
+                                   name="top-search" id="top-search">
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+
+                    <li>
+                        <a href="login.html">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+        </div>
+        <div class="wrapper wrapper-content" layout:fragment="content">
+
+            <div class="footer">
+                <div class="float-right">
+                    10GB of <strong>250GB</strong> Free.
+                </div>
+                <div>
+                    <strong>Copyright</strong> Example Company &copy; 2014-2018
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Mainly scripts -->
+<script th:src="@{/assets/js/jquery-3.1.1.min.js}"></script>
+<script th:src="@{/assets/js/popper.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.js}"></script>
+<script th:src="@{/assets/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/assets/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
+<script th:src="@{/assets/js/plugins/dataTables/datatables.min.js}"></script>
+<script th:src="@{/assets/js/plugins/dataTables/dataTables.bootstrap4.min.js}"></script>
+
+<!-- Custom and plugin javascript -->
+<script th:src="@{/assets/js/inspinia.js}"></script>
+<script th:src="@{/assets/js/plugins/pace/pace.min.js}"></script>
+
+<!-- jQuery UI -->
+<script th:src="@{/assets/js/plugins/jquery-ui/jquery-ui.min.js}"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.dataTables-example').DataTable({
+            responsive: true,
+        });
+    });
+</script>
+</body>
+</html>
