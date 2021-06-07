@@ -56,16 +56,8 @@ public class OrdersController {
 
         model.addAttribute("order", order);
 
-        //model.addAttribute("menus", menuService.getMenus());
-        List<OrderSegment> myOrder = new ArrayList<>();
-        List<OrderSegment> orderSegments = orderSegmentService.getOrderSegment();
-        for (int i=0; i < orderSegments.size(); i++) {
-            if (orderSegments.get(i).getIdOrder() == order.getIdOrder()) {
-                myOrder.add(orderSegments.get(i));
-            }
-        }
+        List<OrderSegment> myOrder = orderSegmentService.getOrderSegmentsByIdOrder(order.getIdOrder());
 
-        orderSegmentService.getOrderSegmentsByIdOrder()
         model.addAttribute("orderSegments", myOrder);
         return "/orders/detail";
     }
