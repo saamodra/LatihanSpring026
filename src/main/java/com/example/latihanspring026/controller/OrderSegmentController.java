@@ -46,6 +46,8 @@ public class OrderSegmentController {
         orderSeg.setOsPrice(menu.getHarga() * orderSeg.getOsCount());
         orderSegmentService.addOrderSegment(orderSeg);
 
+        updateOrder(orderSeg.getIdOrder());
+
         return "redirect:/orders";
     }
 
