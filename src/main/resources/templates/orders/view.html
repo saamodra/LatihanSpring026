@@ -36,11 +36,7 @@
                 <h5 class="alert alert-info">Form Pemesanan</h5>
             </div>
             <form action="#" th:action="@{/order-segment/tambah}" th:object="${ordersegment}" method="post">
-
-                <div class="form-group">
-                    <label for="idOrder">ID Order</label>
-                    <input type="text" th:field="*{idOrder}" id="idOrder" class="form-control">
-                </div>
+                <input type="hidden" th:field="*{idOrder}" id="idOrder" class="form-control">
 
                 <div class="form-group">
                     <label for="idMenu">Nama Menu</label>

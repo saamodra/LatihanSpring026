@@ -41,7 +41,6 @@ public class OrderSegmentController {
 
         // set ID menu sesuai dengan id terakhir ditambah 1
         orderSeg.setIdOrderSegment(orderSegmentService.getLastData().getIdOrderSegment() + 1);
-        //menu.setIdMenu(menuService.getLastData().getIdMenu() + 1);
 
         Menu menu = menuService.getMenuById(orderSeg.getIdMenu());
         orderSeg.setOsPrice(menu.getHarga() * orderSeg.getOsCount());

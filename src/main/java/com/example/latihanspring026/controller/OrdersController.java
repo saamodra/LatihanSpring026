@@ -42,9 +42,11 @@ public class OrdersController {
     @GetMapping("/orders/view/{id}")
     public String view(@PathVariable int id, Model model) {
         Orders order = orderService.getOrderById(id);
+        OrderSegment orderSegment = new OrderSegment();
+        orderSegment.setIdOrder(order.getIdOrder());
 
         model.addAttribute("order", order);
-        model.addAttribute("ordersegment", new OrderSegment());
+        model.addAttribute("ordersegment", orderSegment);
         return "/orders/view";
     }
 
@@ -53,6 +55,7 @@ public class OrdersController {
         Orders order = orderService.getOrderById(id);
 
         model.addAttribute("order", order);
+
         //model.addAttribute("menus", menuService.getMenus());
         List<OrderSegment> myOrder = new ArrayList<>();
         List<OrderSegment> orderSegments = orderSegmentService.getOrderSegment();
@@ -61,6 +64,8 @@ public class OrdersController {
                 myOrder.add(orderSegments.get(i));
             }
         }
+
+        orderSegmentService.getOrderSegmentsByIdOrder()
         model.addAttribute("orderSegments", myOrder);
         return "/orders/detail";
     }
