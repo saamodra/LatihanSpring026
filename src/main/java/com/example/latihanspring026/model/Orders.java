@@ -1,11 +1,16 @@
 package com.example.latihanspring026.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Orders {
     private int idOrder;
     private String namaCustomer;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date orderDate;
+
     private int orderCount;
     private double orderBill;
     private double orderDelivery;
