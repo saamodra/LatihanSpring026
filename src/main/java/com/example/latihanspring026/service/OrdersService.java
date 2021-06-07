@@ -1,5 +1,6 @@
 package com.example.latihanspring026.service;
 
+import com.example.latihanspring026.model.Menu;
 import com.example.latihanspring026.model.OrderSegment;
 import com.example.latihanspring026.model.Orders;
 import com.example.latihanspring026.model.Result;
@@ -108,5 +109,10 @@ public class OrdersService {
         updateOrder(order);
 
         return new Result(200, "Ubah data berhasil.");
+    }
+
+    public Orders getLastData() {
+        int lastIndex = orders.size() - 1;
+        return orders.get(lastIndex);
     }
 }
