@@ -1,47 +1,74 @@
 package com.example.latihanspring026.controller;
 
 import com.example.latihanspring026.model.Menu;
-import com.example.latihanspring026.model.Result;
 import com.example.latihanspring026.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@RestController
+@Controller
 public class MenuController {
+
     @Autowired
     MenuService menuService;
 
-    @GetMapping("/menus")
-    public List<Menu> getMenus() {
-        return menuService.getMenus();
+    @GetMapping("/menu")
+    public String index(Model model) {
+        model.addAttribute("menus", menuService.getMenus());
+        return "/menu/index";
     }
 
-    @GetMapping("/menu")
-    public Object getMenu(@RequestParam("id") int id) {
+    @GetMapping("/menu/tambah")
+    public String add(Model model) {
+        model.addAttribute("menu", new Menu());
+        return "/menu/add";
+    }
+
+    @GetMapping("/menu/ubah/{id}")
+    public String edit(@PathVariable int id, Model model) {
         Menu menu = menuService.getMenuById(id);
 
-        if (menu == null) {
-            return new Result(500, "Data tidak ditemukan.");
+        model.addAttribute("menu", menu);
+        return "/menu/update";
+    }
+
+    @PostMapping("/menu/tambah")
+    public String store(Menu menu, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "/menu/add";
         }
 
-        return menu;
+        // set ID menu sesuai dengan id terakhir ditambah 1
+        menu.setIdMenu(menuService.getLastData().getIdMenu() + 1);
+
+        menuService.addMenu(menu);
+
+        return "redirect:/menu";
     }
 
-    @PostMapping("/menu")
-    public Object saveMenu(HttpServletResponse response, @RequestBody Menu menu) {
-        return menuService.addMenu(menu);
+    @PostMapping("/menu/ubah/{id}")
+    public String update(@PathVariable int id, Menu menu, BindingResult result, Model model) {
+        menu.setIdMenu(id);
+        if (result.hasErrors()) {
+            return "/menu/ubah";
+        }
+
+        menuService.updateMenu(menu);
+
+        return "redirect:/menu";
     }
 
-    @PutMapping("/menu")
-    public Object updateMenu(HttpServletResponse response, @RequestBody Menu menu) {
-        return menuService.updateMenu(menu);
+    @GetMapping("/menu/hapus/{id}")
+    public String destroy(@PathVariable int id, Model model) {
+        menuService.deleteMenu(id);
+
+        return "redirect:/menu";
     }
 
-    @DeleteMapping("/menu")
-    public Object deleteMenu(HttpServletResponse response, @RequestParam("id") int id) {
-        return menuService.deleteMenu(id);
-    }
 }

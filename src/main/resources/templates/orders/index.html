@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      lang="en"
+      layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="ibox ">
+        <div class="ibox-title">
+            <h5>Data Order</h5>
+        </div>
+        <div class="ibox-content">
+            <div th:switch="${orders}">
+                <a href="/menu/tambah" class="btn btn-primary btn-sm mb-3"><i class="fa fa-plus"></i> Tambah Data</a>
+                <h2 th:case="null">No users yet!</h2>
+                <div th:case="*">
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                        <tr>
+                            <th>ID Order</th>
+                            <th>Nama Customer</th>
+                            <th>Tanggal Order</th>
+                            <th>Jumlah Order</th>
+                            <th>Tagihan Order</th>
+                            <th>Biaya Kirim</th>
+                            <th>Total Biaya</th>
+                            <th>Aksi</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="order : ${orders}">
+                            <td th:text="${order.idOrder}"></td>
+                            <td th:text="${order.namaCustomer}"></td>
+                            <td th:text="${order.orderDate}"></td>
+                            <td th:text="${order.orderCount}"></td>
+                            <td th:text="${order.orderBill}"></td>
+                            <td th:text="${order.orderDelivery}"></td>
+                            <td th:text="${order.orderTotal}"></td>
+                            <td>
+                                <a th:href="@{/orders/view/{id}(id=${order.idOrder})}" class="btn btn-sm btn-secondary"><i class="fa fa-edit"></i> Tambah Detail</a>
+                                <a th:href="@{/orders/detail/{id}(id=${order.idOrder})}" class="btn btn-sm btn-info"><i class="fa fa-list"></i> Detail</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

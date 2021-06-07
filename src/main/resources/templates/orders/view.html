@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      lang="en"
+      layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Orders</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="ibox ">
+        <div class="ibox-title">
+            <h5>Data Order</h5>
+        </div>
+        <div class="ibox-content">
+
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <td>ID Order</td>
+                    <td th:text="${order.idOrder}"></td>
+                </tr>
+                <tr>
+                    <td>Nama Customer</td>
+                    <td th:text="${order.namaCustomer}"></td>
+                </tr>
+                <tr>
+                    <td>Tanggal Order</td>
+                    <td th:text="${order.orderDate}"></td>
+                </tr>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="form-group">
+                <h5 class="alert alert-info">Form Pemesanan</h5>
+            </div>
+            <form action="#" th:action="@{/order-segment/tambah}" th:object="${ordersegment}" method="post">
+                <input type="hidden" th:field="*{idOrder}" id="idOrder" class="form-control">
+
+                <div class="form-group">
+                    <label for="idMenu">Nama Menu</label>
+                    <select id="idMenu" th:field="*{idMenu}" class="form-control">
+                        <option value="1">Nasi Goreng</option>
+                        <option value="2">Mie Rebus</option>
+                    </select>
+                    <span th:if="${#fields.hasErrors('idMenu')}" th:errors="*{idMenu}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="osCount">Jumlah</label>
+                    <input type="text" th:field="*{osCount}" id="osCount" placeholder="Jumlah"
+                           class="form-control">
+                    <span th:if="${#fields.hasErrors('osCount')}" th:errors="*{osCount}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="osDetail">Detail Pesanan</label>
+                    <input type="text" th:field="*{osDetail}" id="osDetail" placeholder="Detail Pesanan"
+                           class="form-control">
+                    <span th:if="${#fields.hasErrors('osDetail')}" th:errors="*{osDetail}"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

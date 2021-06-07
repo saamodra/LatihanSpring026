@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorate="~{layout/main}">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Menu</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="ibox ">
+    <div class="ibox-title">
+      <h5>Ubah Menu</h5>
+    </div>
+    <div class="ibox-content">
+      <form action="#" th:action="@{/menu/ubah/{id}(id=${menu.idMenu})}" th:object="${menu}" method="post">
+        <div class="form-group">
+          <label for="menuName">Nama Menu</label>
+          <input type="text" th:field="*{menuName}" id="menuName" placeholder="Nama Menu"
+                 class="form-control">
+          <span th:if="${#fields.hasErrors('menuName')}" th:errors="*{menuName}"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="menuCategory">Kategori Menu</label>
+          <input type="text" th:field="*{menuCategory}" id="menuCategory" placeholder="Kategori menu"
+                 class="form-control">
+          <span th:if="${#fields.hasErrors('menuCategory')}" th:errors="*{menuCategory}"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="menuDetail">Detail Menu</label>
+          <input type="text" th:field="*{menuDetail}" id="menuDetail" placeholder="Detail menu"
+                 class="form-control">
+          <span th:if="${#fields.hasErrors('menuDetail')}" th:errors="*{menuDetail}"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="harga">Harga</label>
+          <input type="text" th:field="*{harga}" id="harga" placeholder="Harga" class="form-control">
+          <span th:if="${#fields.hasErrors('harga')}" th:errors="*{harga}"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="statusBasi">Status Basi</label>
+          <select id="statusBasi" th:field="*{statusBasi}" class="form-control">
+            <option value="-1">Status Basi</option>
+            <option value="0">Tidak Cepat Basi</option>
+            <option value="1">Cepat Basi</option>
+          </select>
+          <span th:if="${#fields.hasErrors('statusBasi')}" th:errors="*{statusBasi}"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

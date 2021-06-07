@@ -34,6 +34,11 @@ public class MenuService {
         return null;
     }
 
+    public Menu getLastData() {
+        int lastIndex = menus.size() - 1;
+        return menus.get(lastIndex);
+    }
+
     public Result addMenu(Menu menu) {
         menus.add(menu);
         return new Result(200, "Tambah data berhasil.");
