@@ -29,31 +29,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="orderCount">Jumlah Order</label>
-                    <input type="text" th:field="*{orderCount}" id="orderCount" placeholder="Jumlah Order"
-                           class="form-control">
-                    <span th:if="${#fields.hasErrors('orderCount')}" th:errors="*{orderCount}"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="orderBill">Tagihan Order</label>
-                    <input type="text" th:field="*{orderBill}" id="orderBill" placeholder="Tagihan Order"
-                           class="form-control">
-                    <span th:if="${#fields.hasErrors('orderBill')}" th:errors="*{orderBill}"></span>
-                </div>
-
-                <div class="form-group">
                     <label for="orderDelivery">Biaya Kirim</label>
                     <input type="text" th:field="*{orderDelivery}" id="orderDelivery" placeholder="Biaya Kirim"
                            class="form-control">
                     <span th:if="${#fields.hasErrors('orderDelivery')}" th:errors="*{orderDelivery}"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="orderTotal">Total Biaya</label>
-                    <input type="text" th:field="*{orderTotal}" id="orderTotal" placeholder="Total Biaya"
-                           class="form-control">
-                    <span th:if="${#fields.hasErrors('orderTotal')}" th:errors="*{orderTotal}"></span>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan</button>
