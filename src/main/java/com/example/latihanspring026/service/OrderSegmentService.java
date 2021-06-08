@@ -20,13 +20,31 @@ public class OrderSegmentService {
     @Autowired
     private OrdersService ordersService;
 
+    @Autowired
+    private MenuService menuService;
+
+
     @PostConstruct
     private void initialize() {
         orderSegments = new ArrayList<>();
+        List<Menu> menuList = menuService.getMenus();
+        List<Orders> orderList = ordersService.getOrders();
+
         orderSegments.add(new OrderSegment(1, 1, 1, 1, 10000.0, "Pedas"));
+        orderSegments.get(0).setMenu(menuList.get(0));
+        orderSegments.get(0).setOrder(orderList.get(0));
+
         orderSegments.add(new OrderSegment(2, 1, 2, 1, 8000.0, "Sedang"));
+        orderSegments.get(1).setMenu(menuList.get(1));
+        orderSegments.get(1).setOrder(orderList.get(0));
+
         orderSegments.add(new OrderSegment(3, 2, 2, 2, 16000.0, "Sedang"));
+        orderSegments.get(2).setMenu(menuList.get(1));
+        orderSegments.get(2).setOrder(orderList.get(1));
+
         orderSegments.add(new OrderSegment(4, 3, 3, 1, 20000.0, "Pedas"));
+        orderSegments.get(3).setMenu(menuList.get(2));
+        orderSegments.get(3).setOrder(orderList.get(2));
     }
 
     public List<OrderSegment> getOrderSegment() {

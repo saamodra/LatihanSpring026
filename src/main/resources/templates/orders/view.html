@@ -41,8 +41,7 @@
                 <div class="form-group">
                     <label for="idMenu">Nama Menu</label>
                     <select id="idMenu" th:field="*{idMenu}" class="form-control">
-                        <option value="1">Nasi Goreng</option>
-                        <option value="2">Mie Rebus</option>
+                        <option th:each="menu : ${menus}" th:value="${menu.idMenu}" th:text="${menu.menuName}"></option>
                     </select>
                     <span th:if="${#fields.hasErrors('idMenu')}" th:errors="*{idMenu}"></span>
                 </div>

@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class MenuController {
     }
 
     @PostMapping("/menu/tambah")
-    public String store(Menu menu, BindingResult result, Model model) {
+    public String store(RedirectAttributes redirectAttributes, Menu menu, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "/menu/add";
         }
@@ -48,26 +49,26 @@ public class MenuController {
         menu.setIdMenu(menuService.getLastData().getIdMenu() + 1);
 
         menuService.addMenu(menu);
-
+        redirectAttributes.addFlashAttribute("message", "Menu berhasil ditambah.");
         return "redirect:/menu";
     }
 
     @PostMapping("/menu/ubah/{id}")
-    public String update(@PathVariable int id, Menu menu, BindingResult result, Model model) {
+    public String update(RedirectAttributes redirectAttributes, @PathVariable int id, Menu menu, BindingResult result, Model model) {
         menu.setIdMenu(id);
         if (result.hasErrors()) {
             return "/menu/ubah";
         }
 
         menuService.updateMenu(menu);
-
+        redirectAttributes.addFlashAttribute("message", "Menu berhasil diubah.");
         return "redirect:/menu";
     }
 
     @GetMapping("/menu/hapus/{id}")
-    public String destroy(@PathVariable int id, Model model) {
+    public String destroy(RedirectAttributes redirectAttributes, @PathVariable int id, Model model) {
         menuService.deleteMenu(id);
-
+        redirectAttributes.addFlashAttribute("message", "Menu berhasil dihapus.");
         return "redirect:/menu";
     }
 

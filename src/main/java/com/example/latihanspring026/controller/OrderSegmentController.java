@@ -2,6 +2,7 @@ package com.example.latihanspring026.controller;
 
 import com.example.latihanspring026.model.Menu;
 import com.example.latihanspring026.model.OrderSegment;
+import com.example.latihanspring026.model.Orders;
 import com.example.latihanspring026.model.Result;
 import com.example.latihanspring026.service.MenuService;
 import com.example.latihanspring026.service.OrderSegmentService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -34,7 +36,7 @@ public class OrderSegmentController {
     }
 
     @PostMapping("/order-segment/tambah")
-    public String store(OrderSegment orderSeg, BindingResult result, Model model) {
+    public String store(RedirectAttributes redirectAttributes, OrderSegment orderSeg, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "/view/add";
         }
@@ -43,11 +45,16 @@ public class OrderSegmentController {
         orderSeg.setIdOrderSegment(orderSegmentService.getLastData().getIdOrderSegment() + 1);
 
         Menu menu = menuService.getMenuById(orderSeg.getIdMenu());
+        Orders order = ordersService.getOrderById(orderSeg.getIdOrder());
+
+        orderSeg.setOrder(order);
+        orderSeg.setMenu(menu);
         orderSeg.setOsPrice(menu.getHarga() * orderSeg.getOsCount());
         orderSegmentService.addOrderSegment(orderSeg);
 
         updateOrder(orderSeg.getIdOrder());
 
+        redirectAttributes.addFlashAttribute("message", "Order detail berhasil ditambah.");
         return "redirect:/orders";
     }
 

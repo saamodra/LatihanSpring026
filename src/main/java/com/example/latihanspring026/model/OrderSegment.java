@@ -1,5 +1,6 @@
 package com.example.latihanspring026.model;
 
+
 public class OrderSegment {
     private int idOrderSegment;
     private int idOrder;
@@ -7,6 +8,8 @@ public class OrderSegment {
     private int osCount;
     private double osPrice;
     private String osDetail;
+    private Orders order;
+    private Menu menu;
 
     public OrderSegment() {
     }
@@ -66,6 +69,22 @@ public class OrderSegment {
 
     public void setOsDetail(String osDetail) {
         this.osDetail = osDetail;
+    }
+
+    public Orders getOrder() {
+        return order;
+    }
+
+    public void setOrder(Orders order) {
+        this.order = order;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 
     @Override

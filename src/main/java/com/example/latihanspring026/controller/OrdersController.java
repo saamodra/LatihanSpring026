@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,7 +44,7 @@ public class OrdersController {
     }
 
     @PostMapping("/orders/tambah")
-    public String store(Orders orders, BindingResult result, Model model) {
+    public String store(RedirectAttributes redirectAttributes, Orders orders, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "/orders/add";
         }
@@ -53,7 +54,7 @@ public class OrdersController {
 //        Date a = orders.getOrderDate();
 //        orders.setOrderDate(a);
         orderService.addOrder(orders);
-
+        redirectAttributes.addFlashAttribute("message", "Order berhasil ditambah.");
         return "redirect:/orders";
     }
 
@@ -63,6 +64,7 @@ public class OrdersController {
         OrderSegment orderSegment = new OrderSegment();
         orderSegment.setIdOrder(order.getIdOrder());
 
+        model.addAttribute("menus", menuService.getMenus());
         model.addAttribute("order", order);
         model.addAttribute("ordersegment", orderSegment);
         return "/orders/view";
